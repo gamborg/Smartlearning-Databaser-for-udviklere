@@ -6,13 +6,19 @@ namespace Skoleinfo.Api.Models;
 
 public partial class SkoleinfoContext : DbContext
 {
-    public SkoleinfoContext()
-    {
-    }
-
     public SkoleinfoContext(DbContextOptions<SkoleinfoContext> options)
         : base(options)
     {
+        InstitutionAvgScores = Set<InstitutionAvgScore>();
+        Institutioners = Set<Institutioner>();
+        Institutionsoplysningers = Set<Institutionsoplysninger>();
+        Karakterers = Set<Karakterer>();
+        Koens = Set<Koen>();
+        Kommuners = Set<Kommuner>();
+        Sporgsmaals = Set<Sporgsmaal>();
+        Svars = Set<Svar>();
+        Trivsels = Set<Trivsel>();
+        TrivselViews = Set<TrivselView>();
     }
 
     public virtual DbSet<InstitutionAvgScore> InstitutionAvgScores { get; set; }
@@ -35,7 +41,9 @@ public partial class SkoleinfoContext : DbContext
 
     public virtual DbSet<TrivselView> TrivselViews { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

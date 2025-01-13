@@ -1,22 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 using Skoleinfo.Api.Models;
 using Microsoft.OpenApi.Models;
+using Skoleinfo.Api.Endpoints;
+using Skoleinfo.Api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Register the DbContext with the dependency injection container
 builder.Services.AddDbContext<SkoleinfoContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 // Add Swagger services
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Skoleinfo API", Version = "v1" });
 });
+
+builder.Services.AddScoped(typeof(ISkoleinfoRepository<>), typeof(SkoleinfoRepository<>));
 
 var app = builder.Build();
 
@@ -32,5 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapSkoleinfoEndpoints();
 
 app.Run();

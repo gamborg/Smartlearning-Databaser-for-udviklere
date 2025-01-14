@@ -12,4 +12,6 @@ public partial class Svar
     public int? Svarnummer { get; set; }
 
     public string? Tekst { get; set; }
+
+    public virtual Sporgsmaal? SporgsmaalsnummerNavigation { get; set; }
 }

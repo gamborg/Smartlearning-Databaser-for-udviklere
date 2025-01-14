@@ -10,4 +10,6 @@ public partial class Kommuner
     public int Nummer { get; set; }
 
     public string Navn { get; set; } = null!;
+
+    public virtual ICollection<Institutioner> Institutioners { get; set; } = new List<Institutioner>();
 }

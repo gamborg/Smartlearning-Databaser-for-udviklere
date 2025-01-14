@@ -16,4 +16,8 @@ public partial class Karakterer
     public int? Klassetrin { get; set; }
 
     public decimal? Gennemsnit { get; set; }
+
+    public virtual Institutioner? InstitutionsnummerNavigation { get; set; }
+
+    public virtual Koen? KoenNavigation { get; set; }
 }

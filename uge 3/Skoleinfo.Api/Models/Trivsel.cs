@@ -16,4 +16,6 @@ public partial class Trivsel
     public int? Koen { get; set; }
 
     public decimal? Vaerdi { get; set; }
+
+    public virtual Sporgsmaal? SporgsmaalsnummerNavigation { get; set; }
 }

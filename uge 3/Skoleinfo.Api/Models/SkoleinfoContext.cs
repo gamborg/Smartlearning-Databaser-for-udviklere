@@ -70,6 +70,8 @@ public partial class SkoleinfoContext : DbContext
 
             entity.ToTable("institutioner");
 
+            entity.HasIndex(e => e.Nummer, "UC_institutioner_nummer").IsUnique();
+
             entity.Property(e => e.Id)
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("id");
@@ -80,6 +82,12 @@ public partial class SkoleinfoContext : DbContext
                 .UseCollation("Latin1_General_100_BIN2_UTF8")
                 .HasColumnName("navn");
             entity.Property(e => e.Nummer).HasColumnName("nummer");
+
+            entity.HasOne(d => d.KommunenummerNavigation).WithMany(p => p.Institutioners)
+                .HasPrincipalKey(p => p.Nummer)
+                .HasForeignKey(d => d.Kommunenummer)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_institutioner_kommuner");
         });
 
         modelBuilder.Entity<Institutionsoplysninger>(entity =>
@@ -152,6 +160,15 @@ public partial class SkoleinfoContext : DbContext
                 .IsFixedLength()
                 .UseCollation("Latin1_General_100_BIN2_UTF8")
                 .HasColumnName("skoleaar");
+
+            entity.HasOne(d => d.InstitutionsnummerNavigation).WithMany(p => p.Karakterers)
+                .HasPrincipalKey(p => p.Nummer)
+                .HasForeignKey(d => d.Institutionsnummer)
+                .HasConstraintName("FK_karakterer_institutioner");
+
+            entity.HasOne(d => d.KoenNavigation).WithMany(p => p.Karakterers)
+                .HasForeignKey(d => d.Koen)
+                .HasConstraintName("FK_karakterer_koen");
         });
 
         modelBuilder.Entity<Koen>(entity =>
@@ -176,6 +193,8 @@ public partial class SkoleinfoContext : DbContext
 
             entity.ToTable("kommuner");
 
+            entity.HasIndex(e => e.Nummer, "UC_kommuner_nummer").IsUnique();
+
             entity.Property(e => e.Id)
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("id");
@@ -192,6 +211,8 @@ public partial class SkoleinfoContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__sporgsma__3213E83F2AD8043A");
 
             entity.ToTable("sporgsmaal");
+
+            entity.HasIndex(e => e.Nummer, "UC_sporgsmaal_nummer").IsUnique();
 
             entity.Property(e => e.Id)
                 .HasDefaultValueSql("(newid())")
@@ -224,6 +245,11 @@ public partial class SkoleinfoContext : DbContext
             entity.Property(e => e.Tekst)
                 .HasColumnType("text")
                 .HasColumnName("tekst");
+
+            entity.HasOne(d => d.SporgsmaalsnummerNavigation).WithMany(p => p.Svars)
+                .HasPrincipalKey(p => p.Nummer)
+                .HasForeignKey(d => d.Sporgsmaalsnummer)
+                .HasConstraintName("FK_svar_sporgsmaal");
         });
 
         modelBuilder.Entity<Trivsel>(entity =>
@@ -246,6 +272,11 @@ public partial class SkoleinfoContext : DbContext
             entity.Property(e => e.Vaerdi)
                 .HasColumnType("decimal(18, 0)")
                 .HasColumnName("vaerdi");
+
+            entity.HasOne(d => d.SporgsmaalsnummerNavigation).WithMany(p => p.Trivsels)
+                .HasPrincipalKey(p => p.Nummer)
+                .HasForeignKey(d => d.Sporgsmaalsnummer)
+                .HasConstraintName("FK_trivsel_sporgsmaal");
         });
 
         modelBuilder.Entity<TrivselView>(entity =>

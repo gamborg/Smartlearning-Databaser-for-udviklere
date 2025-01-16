@@ -5,6 +5,7 @@ using Skoleinfo.Api.Models;
 using Skoleinfo.Api.Repositories;
 using System.Linq.Expressions;
 using System.Linq.Dynamic.Core;
+using Skoleinfo.Api.Repositories.Domain;
 
 namespace Skoleinfo.Api.Endpoints
 {
@@ -14,14 +15,13 @@ namespace Skoleinfo.Api.Endpoints
         {
             MapInstitutionerEndpoints(endpoints);
             MapKaraktererEndpoints(endpoints);
-            MapTrivselEndpoints(endpoints);
         }
 
         public static void MapInstitutionerEndpoints(this IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapGet("/api/institutioner", async (ISkoleinfoRepository<Institutioner> repository) =>
+            endpoints.MapGet("/api/institutioner", async (IUnitOfWork unitOfWork) =>
             {
-                var result = await repository.GetAllAsync(o => o.Karakterers);
+                var result = await unitOfWork.Institutioner.GetInstitutionerWithKaraktererAsync();
                 var dtoResult = result.Select(i => new InstitutionerDto
                 {
                     Id = i.Id,
@@ -38,36 +38,28 @@ namespace Skoleinfo.Api.Endpoints
                 return Results.Ok(dtoResult);
             });
 
-            endpoints.MapGet("/api/institutioner/{id}", async (Guid id, ISkoleinfoRepository<Institutioner> repository) =>
+            endpoints.MapGet("/api/institutioner/{id}", async (Guid id, IUnitOfWork unitOfWork) =>
             {
-                var entity = await repository.GetByIdAsync(id);
+                var entity = await unitOfWork.Institutioner.GetAsync(id);
                 return entity != null ? Results.Ok(entity) : Results.NotFound();
             });
         }
 
         public static void MapKaraktererEndpoints(this IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapGet("/api/karakterer", async (ISkoleinfoRepository<Karakterer> repository) =>
+            endpoints.MapGet("/api/karakterer", async (IUnitOfWork unitOfWork) =>
             {
-                var result = await repository.GetAllAsync();
+                var result = await unitOfWork.Institutioner.GetAllAsync();
                 return Results.Ok(result);
             });
 
-            endpoints.MapGet("/api/karakterer/{id}", async (Guid id, ISkoleinfoRepository<Karakterer> repository) =>
+            endpoints.MapGet("/api/karakterer/{id}", async (Guid id, IUnitOfWork unitOfWork) =>
             {
-                var entity = await repository.GetByIdAsync(id);
+                var entity = await unitOfWork.Institutioner.GetAsync(id);
                 return entity != null ? Results.Ok(entity) : Results.NotFound();
             });
         }
 
-        public static void MapTrivselEndpoints(this IEndpointRouteBuilder endpoints)
-        {
-            endpoints.MapGet("/api/trivsel/{institutionsnummer}", async (int institutionsnummer, ISkoleinfoRepository<Trivsel> repository) =>
-            {
-                var result = await repository.GetTrivselDataAsync(institutionsnummer);
-                return Results.Ok(result);
-            });
-        }
     }
 
     public class InstitutionerDto

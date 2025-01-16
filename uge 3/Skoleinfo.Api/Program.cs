@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Skoleinfo API", Version = "v1" });
 });
 
-builder.Services.AddScoped(typeof(ISkoleinfoRepository<>), typeof(SkoleinfoRepository<>));
+builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
 var app = builder.Build();
 

@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrderApi.Data;
 using System.Linq.Expressions;
 
 namespace OrderApi.Repository.Base
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext _context;
+        protected readonly OrderDbContext _context;
 
-        public Repository(DbContext context)
+        public Repository(OrderDbContext context)
         {
             _context = context;
         }
@@ -33,7 +34,7 @@ namespace OrderApi.Repository.Base
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> GetAsync(Guid id)
+        public async Task<TEntity> GetAsync(int id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }

@@ -4,7 +4,7 @@ namespace OrderApi.Repository.Base
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> GetAsync(Guid id);
+        Task<TEntity> GetAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
 

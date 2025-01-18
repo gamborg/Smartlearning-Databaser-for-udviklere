@@ -1,9 +1,10 @@
-﻿using OrderApi.Repository.Base;
-using OrderApi.Models;
+﻿using OrderApi.Models;
+using OrderApi.Repository.Base;
 
 namespace OrderApi.Repository.Domain.Interfaces
 {
-    public interface IOrderRepository : IRepository<Order>
+    public interface IOrderRepository : IRepository<Models.Order>
     {
+        Task<Order> GetOrderWithCustomerAsync(int id);
     }
 }

@@ -5,11 +5,16 @@ using OrderApi.Repository.Domain.Interfaces;
 
 namespace OrderApi.Repository.Domain
 {
-    public class OrderRepository : Repository<Order>, IOrderRepository
+    public class OrderRepository : Repository<Models.Order>, IOrderRepository
     {
         public OrderRepository(OrderDbContext context) : base(context)
         {
 
+        }
+
+        public Task<Order> GetOrderWithCustomerAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

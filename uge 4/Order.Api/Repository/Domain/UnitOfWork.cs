@@ -29,9 +29,9 @@ namespace OrderApi.Repository.Domain
             Suppliers = new SupplierRepository(_context);
         }
 
-        public int Complete()
+        public async Task<int> Complete()
         {
-            throw new NotImplementedException();
+            return await _context.SaveChangesAsync();
         }
 
         public void Dispose()

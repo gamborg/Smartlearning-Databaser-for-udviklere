@@ -13,6 +13,6 @@ namespace OrderApi.Repository
         IProductRepository Products { get; }
         ISupplierRepository Suppliers { get; }
 
-        int Complete();
+        Task<int> Complete();
     }
 }

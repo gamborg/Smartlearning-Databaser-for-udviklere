@@ -21,6 +21,11 @@ namespace OrderApi.Models
         [MaxLength(20)]
         public string Phone { get; set; } = "";
 
+        [MaxLength(50)]
+        public string Email { get; set; } = "";
+
+        public virtual string FullName => $"{FirstName} {LastName}";
+
         public virtual ICollection<Order>? Orders { get; set; }
     }
 }

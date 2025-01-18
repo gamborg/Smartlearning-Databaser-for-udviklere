@@ -61,6 +61,7 @@ namespace OrderApi.Endpoints
                 existingCustomer.City = customer.City;
                 existingCustomer.Country = customer.Country;
                 existingCustomer.Phone = customer.Phone;
+                existingCustomer.Email = customer.Email;
 
                 await unitOfWork.Complete();
                 return Results.Ok(existingCustomer);

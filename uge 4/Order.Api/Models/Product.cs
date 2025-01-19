@@ -9,9 +9,9 @@ namespace OrderApi.Models
         public string ProductName { get; set; } = "";
 
         [Column(TypeName = "decimal(12, 2)")]
-        public decimal UnitPrice { get; set; } = 0;
+        public decimal? UnitPrice { get; set; }
 
-        public string Package { get; set; } = "";
+        public string? Package { get; set; }
 
         [Column(TypeName = "bit")]
         public bool IsDiscontinued { get; set; } = false;

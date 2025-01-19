@@ -10,18 +10,18 @@ namespace OrderApi.Models
         public string CompanyName { get; set; } = "";
 
         [MaxLength(50)]
-        public string ContactName { get; set; } = "";
+        public string? ContactName { get; set; }
 
         [MaxLength(40)]
-        public string ContactTitle { get; set; } = "";
+        public string? ContactTitle { get; set; }
 
         [MaxLength(40)]
-        public string City { get; set; } = "";
+        public string? City { get; set; }
 
         [MaxLength(30)]
-        public string Phone { get; set; } = "";
+        public string? Phone { get; set; }
 
         [MaxLength(30)]
-        public string Fax { get; set; } = "";
+        public string? Fax { get; set; }
     }
 }

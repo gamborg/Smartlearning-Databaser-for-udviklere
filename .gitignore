@@ -58,3 +58,4 @@ project.lock.json
 .DS_Store
 *.pyc
 /uge 3/Skoleinfo.Api/appsettings.Development.json
+/uge 4/Order.Api/appsettings.Development.json

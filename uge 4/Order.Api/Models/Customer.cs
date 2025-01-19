@@ -13,16 +13,16 @@ namespace OrderApi.Models
         public string LastName { get; set; } = "";
 
         [MaxLength(40)]
-        public string City { get; set; } = "";
+        public string? City { get; set; }
 
         [MaxLength(40)]
-        public string Country { get; set; } = "";
+        public string? Country { get; set; }
 
         [MaxLength(20)]
-        public string Phone { get; set; } = "";
+        public string? Phone { get; set; }
 
         [MaxLength(50)]
-        public string Email { get; set; } = "";
+        public string? Email { get; set; }
 
         public virtual string FullName => $"{FirstName} {LastName}";
 

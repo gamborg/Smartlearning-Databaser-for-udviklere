@@ -15,7 +15,7 @@ namespace OrderApi.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-JLTE9PJ\\SQLEXPRESS;Database=OrderApi;Trusted_Connection=True;TrustServerCertificate=True;");
+                
             }
         }
 

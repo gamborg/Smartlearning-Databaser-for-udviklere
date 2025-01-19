@@ -19,9 +19,10 @@ namespace OrderApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,11 +36,11 @@ namespace OrderApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CompanyName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    ContactName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ContactTitle = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Fax = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                    ContactName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ContactTitle = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Fax = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,8 +54,8 @@ namespace OrderApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "DateTime", nullable: false),
-                    OrderNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
+                    OrderNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    TotalAmount = table.Column<decimal>(type: "decimal(12,2)", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -74,8 +75,8 @@ namespace OrderApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    Package = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(12,2)", nullable: true),
+                    Package = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDiscontinued = table.Column<bool>(type: "bit", nullable: false),
                     SupplierId = table.Column<int>(type: "int", nullable: true)
                 },

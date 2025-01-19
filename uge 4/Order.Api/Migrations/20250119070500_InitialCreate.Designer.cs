@@ -12,7 +12,7 @@ using OrderApi.Data;
 namespace OrderApi.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20250117144905_InitialCreate")]
+    [Migration("20250119070500_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,14 +34,16 @@ namespace OrderApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -54,7 +56,6 @@ namespace OrderApi.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -78,11 +79,10 @@ namespace OrderApi.Migrations
                         .HasColumnType("DateTime");
 
                     b.Property<string>("OrderNumber")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<decimal>("TotalAmount")
+                    b.Property<decimal?>("TotalAmount")
                         .HasColumnType("decimal(12, 2)");
 
                     b.HasKey("Id");
@@ -133,7 +133,6 @@ namespace OrderApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Package")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
@@ -143,7 +142,7 @@ namespace OrderApi.Migrations
                     b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("UnitPrice")
+                    b.Property<decimal?>("UnitPrice")
                         .HasColumnType("decimal(12, 2)");
 
                     b.HasKey("Id");
@@ -162,7 +161,6 @@ namespace OrderApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
@@ -172,22 +170,18 @@ namespace OrderApi.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("ContactName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ContactTitle")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Fax")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 

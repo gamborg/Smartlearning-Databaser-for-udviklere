@@ -11,10 +11,10 @@ namespace OrderApi.Models
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
         [MaxLength(10)]
-        public string OrderNumber { get; set; } = "";
+        public string? OrderNumber { get; set; }
 
         [Column(TypeName = "decimal(12, 2)")]
-        public decimal TotalAmount { get; set; } = 0;
+        public decimal? TotalAmount { get; set; }
 
         // Navigation properties
         public virtual Customer? Customer { get; set; }
